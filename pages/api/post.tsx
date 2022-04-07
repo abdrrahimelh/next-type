@@ -3,13 +3,17 @@
 export default function handler(req, res) {
   const body = req.body;
   const nom=body.name;
-  console.log(nom)
-  
-    fetch("http://localhost:4000/api/items", {
+  let resp;
+  try {
+    fetch("http://localhost:5000/api/items", {
       method: "POST",
-      body:  JSON.stringify({name: nom}),
+      body:  JSON.stringify(body),
       headers: { "Content-type": "application/json; charset=UTF-8" },
-    }).then((response) => response.json());
- 
-  res.status(200).json({ name: "John Doe" });
+    }).then((response) => res.status(200).send({ response })
+    );
+   
+  } catch (err) {
+    res.status(500).send({ error: 'failed to post data' })
+  }
+
 }

@@ -5,14 +5,12 @@ export default function Home(props) {
   return (
     <div className="App">
       <ShoppingList data={props.data}></ShoppingList>
-      <h1>hey</h1>
     </div>
   );
 }
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4000/api/items")
+  const res = await fetch("http://localhost:5000/api/items")
   const data = await res.json()
-  console.log(data)
 
   return {
     props: {data},
